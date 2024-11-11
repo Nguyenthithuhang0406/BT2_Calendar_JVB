@@ -1,0 +1,101 @@
+.calendar-app {
+  width: 300px;
+  height: 400px;
+  background-color: #1f1e1e;
+  border: 1px solid #000;
+  margin: auto;
+  position: relative;
+}
+
+.header-app {
+  padding: 0 20px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+}
+
+.month-year {
+  padding: 0 20px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.calendar-day,
+.calendar-date {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+}
+
+.footer-calendar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.minutes {
+  display: flex;
+  align-items: center;
+}
+
+.day,
+.date-time,
+.fa-solid,
+.month,
+.selected-time {
+  color: #ffffff;
+}
+
+.day {
+  font-size: 15px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.calendar-container{
+  padding: 0 20px;
+}
+
+.inactive{
+  color: #6d6c6c;
+}
+
+.today{
+  background-color: blue;
+  border-radius: 50%;
+}
+
+.selected{
+  background-color: aqua;
+  border-radius: 50%;
+  color: #6d6c6c;
+}
+
+.up-down-month, .minutes{
+  display: flex;
+  gap: 10px;
+}
+
+.footer-calendar{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.selected-time{
+  width: 100px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
