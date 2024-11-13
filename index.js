@@ -76,6 +76,7 @@ const renderDateOfMonth = () => {
   const lastDay = new Date(selectedYear, selectedMonth + 1, 0);
   const lastDateOfLastMonth = new Date(selectedYear, selectedMonth, 0);
 
+  //nhung ngay dau tien tron tuan (cua thang truoc)
   for (let i = firstDay.getDay(); i > 0; i--) {
     const day = document.createElement("div");
     day.classList.add("day", "inactive");
@@ -83,6 +84,7 @@ const renderDateOfMonth = () => {
     dates.appendChild(day);
   }
 
+  //nhung ngay trong thang
   for (let i = 1; i <= lastDay.getDate(); i++) {
     const day = document.createElement("div");
     day.classList.add("day");
@@ -96,13 +98,29 @@ const renderDateOfMonth = () => {
     ) {
       day.classList.add("today");
     }
+
+    selectedTime.innerText = "Today";
   }
 
+  //neu ngay cuoi cung cua thang khong phai la chu nhat
+  //hien thi cac ngay sau thang hien tai
   if (lastDay.getDay() !== 6) {
     for (let i = 1; i <= 6 - lastDay.getDay(); i++) {
       const day = document.createElement("div");
       day.classList.add("day", "inactive");
       day.innerText = i;
+      dates.appendChild(day);
+    }
+  }
+
+  //neu ngay cuoi cung cua thang la chu nhat
+  //hien thi 1 tuan tiep theo
+  if (lastDay.getDay() === 6) {
+    for (let i = 1; i <= 7; i++) {
+      const day = document.createElement("div");
+      day.classList.add("day");
+      day.innerText = i;
+      day.classList.add("inactive");
       dates.appendChild(day);
     }
   }
@@ -121,12 +139,11 @@ const renderDateOfMonth = () => {
         selectedTimeMonth,
         selectedTimeDate
       ).getDay();
-      console.log();
+
       //cap nhat tg o footer
       selectedTime.innerText = `${dayName[selectedDay]} ${selectedTimeDate}`;
     });
   });
-
 };
 
 const changeMonth = (i) => {
@@ -145,7 +162,7 @@ const changeMonth = (i) => {
     monthYear.innerText = `${selectedYear}`;
   } else {
     if (view === "selectedYear") {
-      selectedYear += (i > 0) ? 10 : -10;
+      selectedYear += i > 0 ? 10 : -10;
       renderYear();
     }
   }
@@ -197,13 +214,12 @@ const renderYear = () => {
     }
     yearContainer.appendChild(yearElement);
 
-    yearElement.addEventListener('click', () => {
+    yearElement.addEventListener("click", () => {
       selectedYear = parseInt(yearElement.innerText, 10);
       view = "monthOfYear";
       renderMonthOfYear();
-    })
+    });
   }
-  
 };
 
 monthYear.addEventListener("click", () => {
