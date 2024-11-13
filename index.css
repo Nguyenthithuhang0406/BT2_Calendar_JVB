@@ -49,7 +49,8 @@
 .date-time,
 .fa-solid,
 .month,
-.selected-time {
+.selected-time,
+.monthElement {
   color: #ffffff;
 }
 
@@ -63,39 +64,55 @@
   cursor: pointer;
 }
 
-.calendar-container{
+.calendar-container {
   padding: 0 20px;
 }
 
-.inactive{
+.inactive {
   color: #6d6c6c;
 }
 
-.today{
+.today {
   background-color: blue;
   border-radius: 50%;
 }
 
-.selected{
+.selected {
   background-color: aqua;
   border-radius: 50%;
   color: #6d6c6c;
 }
 
-.up-down-month, .minutes{
+.up-down-month,
+.minutes {
   display: flex;
   gap: 10px;
 }
 
-.footer-calendar{
+.footer-calendar {
   display: flex;
   justify-content: flex-start;
 }
 
-.selected-time{
+.selected-time {
   width: 100px;
   height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.monthOfYear {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.monthElement {
+  font-size: 15px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
