@@ -65,6 +65,12 @@
   cursor: pointer;
 }
 
+.day:hover{
+  background-color: #6c6d6b;
+  opacity: 1;
+  border-radius: 50%;
+  color: white;
+}
 .calendar-container {
   padding: 0 20px;
 }
@@ -116,4 +122,12 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.monthElement:hover,
+.yearElement:hover {
+  background-color: #6c6d6b;
+  opacity: 1;
+  border-radius: 50%;
+  color: white;
 }
