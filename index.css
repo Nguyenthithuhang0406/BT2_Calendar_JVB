@@ -50,7 +50,8 @@
 .fa-solid,
 .month,
 .selected-time,
-.monthElement {
+.monthElement,
+.yearElement {
   color: #ffffff;
 }
 
@@ -102,12 +103,12 @@
   align-items: center;
 }
 
-.monthOfYear {
+.monthOfYear, .yearContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
 
-.monthElement {
+.monthElement, .yearElement {
   font-size: 15px;
   width: 45px;
   height: 45px;

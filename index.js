@@ -96,22 +96,6 @@ const renderDateOfMonth = () => {
     ) {
       day.classList.add("today");
     }
-
-    day.addEventListener("click", () => {
-      document
-        .querySelectorAll(".day")
-        .forEach((d) => d.classList.remove("selected"));
-      day.classList.add("selected");
-      selectedTimeDate = i;
-      selectedTimeMonth = selectedMonth;
-      selectedTimeYear = selectedYear;
-      selectedDay = new Date(
-        selectedTimeYear,
-        selectedTimeMonth,
-        selectedTimeDate
-      ).getDay();
-      selectedTime.innerText = `${dayName[selectedDay]} ${selectedTimeDate}`;
-    });
   }
 
   if (lastDay.getDay() !== 6) {
@@ -122,6 +106,27 @@ const renderDateOfMonth = () => {
       dates.appendChild(day);
     }
   }
+
+  //chon ngay
+  const allDays = document.querySelectorAll(".day");
+  allDays.forEach((day) => {
+    day.addEventListener("click", () => {
+      allDays.forEach((d) => d.classList.remove("selected"));
+      day.classList.add("selected");
+      selectedTimeDate = day.innerText;
+      selectedTimeMonth = selectedMonth;
+      selectedTimeYear = selectedYear;
+      selectedDay = new Date(
+        selectedTimeYear,
+        selectedTimeMonth,
+        selectedTimeDate
+      ).getDay();
+      console.log();
+      //cap nhat tg o footer
+      selectedTime.innerText = `${dayName[selectedDay]} ${selectedTimeDate}`;
+    });
+  });
+
 };
 
 const changeMonth = (i) => {
@@ -138,6 +143,11 @@ const changeMonth = (i) => {
   } else if (view === "monthOfYear") {
     selectedYear += i;
     monthYear.innerText = `${selectedYear}`;
+  } else {
+    if (view === "selectedYear") {
+      selectedYear += (i > 0) ? 10 : -10;
+      renderYear();
+    }
   }
 };
 
@@ -149,23 +159,60 @@ const renderMonthOfYear = () => {
 
   monthYear.innerText = `${selectedYear}`;
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 16; i++) {
     const monthElement = document.createElement("div");
-    monthElement.innerText = monthName[i].slice(0, 3);
+    monthElement.innerText = monthName[i % 12].slice(0, 3);
     monthElement.classList.add("monthElement");
+
+    if (i >= 12) {
+      monthElement.classList.add("inactive");
+    }
+
     monthOfYearContainer.appendChild(monthElement);
 
+    const tmp = selectedYear;
     monthElement.addEventListener("click", () => {
-      selectedMonth = i;
+      selectedMonth = i % 12;
+      selectedYear === i >= 12 ? tmp + 1 : tmp;
       view = "dateOfMonth";
       renderDateOfMonth();
     });
   }
 };
 
+const renderYear = () => {
+  const yearContainer = document.createElement("div");
+  yearContainer.classList.add("yearContainer");
+  calendarContainer.innerHTML = "";
+
+  monthYear.innerText = `${selectedYear - 4} - ${selectedYear + 5}`;
+  calendarContainer.appendChild(yearContainer);
+
+  for (let i = 0; i < 16; i++) {
+    const yearElement = document.createElement("div");
+    yearElement.innerText = `${selectedYear - 4 + i}`;
+    yearElement.classList.add("yearElement");
+    if (i >= 12) {
+      yearElement.classList.add("inactive");
+    }
+    yearContainer.appendChild(yearElement);
+
+    yearElement.addEventListener('click', () => {
+      selectedYear = parseInt(yearElement.innerText, 10);
+      view = "monthOfYear";
+      renderMonthOfYear();
+    })
+  }
+  
+};
+
 monthYear.addEventListener("click", () => {
-  view = view === "dateOfMonth" ? "monthOfYear" : "dateOfMonth";
-  view === "dateOfMonth" ? renderDateOfMonth() : renderMonthOfYear();
+  view = view === "dateOfMonth" ? "monthOfYear" : "selectedYear";
+  view === "dateOfMonth"
+    ? renderDateOfMonth()
+    : view === "monthOfYear"
+    ? renderMonthOfYear()
+    : renderYear();
 });
 
 up.addEventListener("click", () => changeMonth(1));
