@@ -58,13 +58,13 @@ const renderDateOfMonth = () => {
   const calendarDay = document.createElement("div");
   calendarDay.classList.add("calendar-day");
   calendarDay.innerHTML = `
-      <div class="day">Su</div>
-      <div class="day">Mo</div>
-      <div class="day">Tu</div>
-      <div class="day">We</div>
-      <div class="day">Th</div>
-      <div class="day">Fr</div>
-      <div class="day">Sa</div>
+      <div class="dayName">Su</div>
+      <div class="dayName">Mo</div>
+      <div class="dayName">Tu</div>
+      <div class="dayName">We</div>
+      <div class="dayName">Th</div>
+      <div class="dayName">Fr</div>
+      <div class="dayName">Sa</div>
   `;
   calendarContainer.appendChild(calendarDay);
 
